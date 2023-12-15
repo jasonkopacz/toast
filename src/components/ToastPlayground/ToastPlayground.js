@@ -9,6 +9,7 @@ function ToastPlayground() {
 
   const [message, setMessage] = React.useState('');
   const [selectedVariant, setSelectedVariant] = React.useState('')
+  const [isHidden, setIsHidden] = React.useState(true)
 
   return (
     <div className={styles.wrapper}>
@@ -16,8 +17,9 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+      {console.log(isHidden)}
 
-      {selectedVariant && <Toast message={message} selectedVariant={selectedVariant} /> }
+      {isHidden === false && <Toast message={message} selectedVariant={selectedVariant} /> }
 
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
@@ -60,7 +62,7 @@ function ToastPlayground() {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <Button>Pop Toast!</Button>
+            <Button onClick={() => (setIsHidden(false))} aria-expanded={!isHidden}>Pop Toast!</Button>
           </div>
         </div>
       </div>
