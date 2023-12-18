@@ -1,17 +1,15 @@
 import React from 'react';
-
-import Toast from '../Toast';
 import styles from './ToastShelf.module.css';
 
-function ToastShelf() {
+function ToastShelf({ toasts }) {
+
   return (
     <ol className={styles.wrapper}>
-      <li className={styles.toastWrapper}>
-        <Toast variant="notice">Example notice toast</Toast>
+      {toasts.map((toast, index) => (
+      <li className={styles.toastWrapper} key={index}>
+          {toast}
       </li>
-      <li className={styles.toastWrapper}>
-        <Toast variant="error">Example error toast</Toast>
-      </li>
+      ))}
     </ol>
   );
 }

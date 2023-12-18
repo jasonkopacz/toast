@@ -1,15 +1,25 @@
 import React from 'react';
 import Button from '../Button';
 import styles from './ToastPlayground.module.css';
+import ToastShelf from '../ToastShelf/ToastShelf';
 import Toast from '../Toast/Toast';
+
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
   const id = React.useId();
-
+  const [toasts, setToasts] = React.useState([])
   const [message, setMessage] = React.useState('');
   const [selectedVariant, setSelectedVariant] = React.useState('')
   const [isHidden, setIsHidden] = React.useState(true)
+
+  function handleClick() {
+    const toast = <Toast message={message} selectedVariant={selectedVariant} setIsHidden={setIsHidden} />
+    setToasts([...toasts, toast])
+    setIsHidden(false)
+    setMessage('')
+    setSelectedVariant('notice')
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -17,9 +27,8 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
-      {console.log(isHidden)}
 
-      {isHidden === false && <Toast message={message} selectedVariant={selectedVariant} /> }
+      {isHidden === false && <ToastShelf toasts={toasts} /> }
 
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
@@ -62,7 +71,7 @@ function ToastPlayground() {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <Button onClick={() => (setIsHidden(false))} aria-expanded={!isHidden}>Pop Toast!</Button>
+            <Button onClick={handleClick} aria-expanded={!isHidden}>Pop Toast!</Button>
           </div>
         </div>
       </div>

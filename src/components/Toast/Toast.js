@@ -8,7 +8,6 @@ import {
 } from 'react-feather';
 
 import VisuallyHidden from '../VisuallyHidden';
-import useToggle from '../../hooks/use-toggle';
 
 import styles from './Toast.module.css';
 
@@ -19,7 +18,7 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ message, selectedVariant }) {
+function Toast({ message, selectedVariant, setIsHidden }) {
   let Tag = ICONS_BY_VARIANT[selectedVariant]
 
   return ( 
@@ -30,7 +29,7 @@ function Toast({ message, selectedVariant }) {
       <p className={styles.content}>
         {message}
       </p>
-      <button className={styles.closeButton} onClick={() => (useToggle())}>
+      <button className={styles.closeButton} onClick={() => (setIsHidden(true))}>
         <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
