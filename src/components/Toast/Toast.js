@@ -38,10 +38,12 @@ function handleClick(toasts, setToasts, id) {
       </div>
       <p className={styles.content}>
         {message}
-      </p>
-      <button className={styles.closeButton} onClick={() => handleClick(value.toasts, value.setToasts, id)}>
-        <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
+      </p>
+      <button className={styles.closeButton} 
+      onClick={() => handleClick(value.toasts, value.setToasts, id)}
+      aria-label='Dismiss message' aria-live='off'>
+        <X size={24} />
       </button>
     </div>
   );
